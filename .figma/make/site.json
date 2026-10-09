@@ -1,0 +1,10 @@
+{
+  "description": "Showcase your engineering projects and personal adventures with a beautifully designed portfolio that reflects your unique journey and creativity.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

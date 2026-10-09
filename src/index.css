@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "DM Mono", monospace;
+  --color-ivory: #f4f1e9;
+  --color-ink: #302f2a;
+  --color-sage: #526854;
+  --color-terracotta: #a9553d;
+  --color-beige: #ded3c0;
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background: #f4f1e9;
+    color: #302f2a;
+    font-family: "Manrope", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: .025;
+    content: "";
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+  }
+  a, button { -webkit-tap-highlight-color: transparent; }
+  button { cursor: pointer; }
+  ::selection { background: #a9553d; color: #f4f1e9; }
+}
+
+@layer components {
+  .page-shell { width: min(90vw, 1440px); margin-inline: auto; }
+  .section-space { padding-block: clamp(6rem, 11vw, 10rem); }
+  .eyebrow { font-family: "DM Mono", monospace; font-size: .67rem; line-height: 1.4; letter-spacing: .16em; text-transform: uppercase; color: color-mix(in srgb, #302f2a 55%, transparent); }
+  .page-title { font-family: "Instrument Serif", serif; font-size: clamp(4.5rem, 11vw, 10rem); line-height: .78; letter-spacing: -.04em; }
+  .section-title { font-family: "Instrument Serif", serif; font-size: clamp(3.4rem, 7vw, 6.5rem); line-height: .85; letter-spacing: -.035em; }
+  .nav-link { position: relative; padding-block: .25rem; font-size: .8rem; color: color-mix(in srgb, #302f2a 65%, transparent); }
+  .nav-link::after { position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; content: ""; background: #302f2a; transform: scaleX(0); transform-origin: right; transition: transform .3s; }
+  .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); transform-origin: left; }
+  .nav-link.active { color: #302f2a; }
+  .focus-ring:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid #a9553d; outline-offset: 4px; }
+  .world-card { position: relative; display: block; min-height: min(70vh, 680px); overflow: hidden; border: 1px solid color-mix(in srgb, #302f2a 15%, transparent); transition: transform .65s cubic-bezier(.22,1,.36,1), box-shadow .65s cubic-bezier(.22,1,.36,1); }
+  .world-card:hover { transform: translateY(-10px); box-shadow: 0 28px 70px rgba(48,47,42,.16); }
+  .world-card::after { position: absolute; inset: 0; z-index: 2; pointer-events: none; border: 1px solid rgba(244,241,233,0); content: ""; transition: inset .65s cubic-bezier(.22,1,.36,1), border-color .65s; }
+  .world-card:hover::after { inset: 16px; border-color: rgba(244,241,233,.55); }
+  .world-title { transition: transform .65s cubic-bezier(.22,1,.36,1), letter-spacing .65s cubic-bezier(.22,1,.36,1); }
+  .world-card:hover .world-title { transform: translateX(10px); letter-spacing: -.025em; }
+  .blueprint { background-color: #dce0d5; background-image: linear-gradient(rgba(82,104,84,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(82,104,84,.12) 1px, transparent 1px); background-position: 0 0; background-size: 34px 34px; transition: background-size .8s ease, background-position .8s ease, background-color .8s ease; }
+  .blueprint:hover { background-color: #cdd5c8; background-position: 17px 17px; background-size: 42px 42px; }
+  .schematic-motif { position: absolute; top: 19%; right: 8%; width: 42%; aspect-ratio: 1; color: rgba(82,104,84,.42); transition: transform .8s cubic-bezier(.22,1,.36,1); }
+  .blueprint:hover .schematic-motif { transform: rotate(12deg) scale(1.08); }
+  .schematic-ring { position: absolute; border: 1px solid currentColor; border-radius: 999px; transition: transform .8s cubic-bezier(.22,1,.36,1); }
+  .schematic-ring-one { inset: 5%; }
+  .schematic-ring-two { inset: 28%; border-style: dashed; }
+  .blueprint:hover .schematic-ring-one { transform: rotate(35deg); }
+  .blueprint:hover .schematic-ring-two { transform: rotate(-50deg) scale(.85); }
+  .schematic-axis { position: absolute; top: 50%; left: -12%; width: 124%; height: 1px; background: currentColor; transform: rotate(-24deg); }
+  .schematic-node { position: absolute; top: 18%; right: 10%; width: 8px; height: 8px; border-radius: 999px; background: #a9553d; box-shadow: 0 0 0 8px rgba(169,85,61,.13); transition: transform .8s cubic-bezier(.22,1,.36,1); }
+  .blueprint:hover .schematic-node { transform: translate(-34px, 42px); }
+  .technical-grid { background-image: linear-gradient(rgba(82,104,84,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(82,104,84,.07) 1px, transparent 1px); background-size: 48px 48px; }
+  .technical-tag { border: 1px solid color-mix(in srgb, #302f2a 20%, transparent); padding: .3rem .5rem; font-family: "DM Mono", monospace; font-size: .58rem; text-transform: uppercase; letter-spacing: .05em; }
+  .link-arrow { display: inline-flex; align-items: center; gap: .5rem; font-size: .84rem; font-weight: 600; }
+  .link-arrow svg { width: 1rem; transition: transform .25s; }
+  .link-arrow:hover svg { transform: translateX(.25rem); }
+  .link-line { border-bottom: 1px solid transparent; transition: border-color .2s; }
+  .link-line:hover { border-color: currentColor; }
+  .filter-button { border: 1px solid color-mix(in srgb, #302f2a 20%, transparent); padding: .6rem .9rem; font-family: "DM Mono", monospace; font-size: .62rem; text-transform: uppercase; transition: .25s; }
+  .filter-button:hover, .filter-button.selected { border-color: #526854; background: #526854; color: #f4f1e9; }
+  .editorial-copy { font-family: "Manrope", sans-serif; font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.8; }
+  .editorial-copy p { margin-bottom: 2rem; }
+  .editorial-copy .lead { font-family: "Instrument Serif", serif; font-size: clamp(2rem, 3.4vw, 3.5rem); line-height: 1.15; }
+  .editorial-copy blockquote { margin-block: 4rem; border-left: 2px solid #a9553d; padding-left: 2rem; font-family: "Instrument Serif", serif; font-size: clamp(2rem, 4vw, 4rem); font-style: italic; line-height: 1; }
+  .case-section { border-top: 1px solid color-mix(in srgb, #302f2a 15%, transparent); padding-block: 3rem; }
+  .case-section h2 { margin-top: 1rem; font-family: "Instrument Serif", serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: .95; }
+  .case-section > p:last-of-type { margin-top: 1.5rem; max-width: 42rem; font-size: 1.05rem; line-height: 1.8; color: color-mix(in srgb, #302f2a 67%, transparent); }
+  .case-section pre { margin-top: 2rem; overflow-x: auto; background: #302f2a; padding: 1.5rem; color: #f4f1e9; font-family: "DM Mono", monospace; font-size: .75rem; line-height: 1.8; }
+  .disabled-link { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid color-mix(in srgb, #302f2a 15%, transparent); padding: .65rem .9rem; font-size: .75rem; color: color-mix(in srgb, #302f2a 40%, transparent); cursor: not-allowed; }
+  .disabled-link svg { width: .85rem; }
+  .about-section { padding-block: clamp(7rem, 14vw, 13rem); }
+  .about-kicker { max-width: 8ch; font-family: "Manrope", sans-serif; font-size: clamp(3.8rem, 6.5vw, 7rem); font-weight: 700; line-height: .88; letter-spacing: -.065em; color: #a9553d; }
+  .about-body { max-width: 66ch; font-family: "Manrope", sans-serif; font-size: clamp(1.08rem, 1.35vw, 1.25rem); font-weight: 500; line-height: 1.85; letter-spacing: -.012em; color: color-mix(in srgb, #302f2a 82%, transparent); }
+  .about-kicker + .about-body { margin-top: 2rem; }
+  .about-statement { max-width: 18ch; font-family: "Instrument Serif", serif; font-size: clamp(3rem, 5.5vw, 6rem); line-height: .94; letter-spacing: -.025em; }
+  .about-duke { max-width: 24ch; font-size: clamp(2.35rem, 3.5vw, 4.25rem); line-height: 1.02; }
+  .about-engineering-section { position: relative; padding-block: clamp(6rem, 10vw, 9rem); border-block: 1px solid color-mix(in srgb, #526854 14%, transparent); }
+  .engineering-collage::after { position: absolute; right: 7%; bottom: 6%; z-index: 0; width: 58%; aspect-ratio: 1; border: 1px solid color-mix(in srgb, #a9553d 48%, transparent); border-radius: 999px; content: ""; }
+  .engineering-collage-shape { position: absolute; top: 9%; right: 4%; z-index: 0; width: 68%; height: 72%; background: color-mix(in srgb, #526854 10%, transparent); transform: translate(7%, -7%); }
+  .engineering-belief { display: grid; gap: 2rem; align-items: start; margin-top: 1rem; border-block: 1px solid color-mix(in srgb, #302f2a 22%, transparent); padding-block: clamp(2rem, 4vw, 3.5rem); }
+  .engineering-belief-keywords { display: flex; flex-wrap: wrap; gap: .75rem; font-family: "DM Mono", monospace; font-size: .65rem; line-height: 1.6; letter-spacing: .14em; text-transform: uppercase; color: #a9553d; }
+  .engineering-belief-keywords span { color: color-mix(in srgb, #302f2a 28%, transparent); }
+  .engineering-philosophy { max-width: 92ch; font-size: clamp(1.1rem, 1.45vw, 1.35rem); line-height: 1.8; }
+  .section-number { font-family: "DM Mono", monospace; font-size: .65rem; line-height: 1.4; letter-spacing: .16em; text-transform: uppercase; color: color-mix(in srgb, #302f2a 52%, transparent); }
+  .photo-caption { margin-top: .8rem; font-family: "DM Mono", monospace; font-size: .58rem; line-height: 1.5; letter-spacing: .08em; text-transform: uppercase; color: color-mix(in srgb, #302f2a 45%, transparent); }
+  .project-grid { background-image: linear-gradient(rgba(255,255,255,.22) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.22) 1px, transparent 1px); background-size: 24px 24px; }
+  .project-visual::after { position: absolute; inset: 0; content: ""; background: linear-gradient(to top, rgba(48,47,42,.7), transparent 55%); opacity: 0; transition: opacity .5s; }
+  .project-visual:hover::after { opacity: 1; }
+  .project-visual > * { z-index: 1; }
+  .project-visual > img { z-index: 0; }
+  .project-crosshair { position: absolute; width: 12px; height: 12px; opacity: 0; transition: opacity .3s; }
+  .project-crosshair::before, .project-crosshair::after { position: absolute; background: rgba(255,255,255,.9); content: ""; }
+  .project-crosshair::before { top: 5px; left: 0; width: 12px; height: 1px; }
+  .project-crosshair::after { top: 0; left: 5px; width: 1px; height: 12px; }
+  .group:hover .project-crosshair { opacity: 1; }
+  .contact-link { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid color-mix(in srgb, #302f2a 20%, transparent); padding-block: clamp(1.5rem, 3vw, 2.4rem); font-family: "Instrument Serif", serif; font-size: clamp(2.4rem, 6vw, 5rem); line-height: 1; transition: color .3s, padding-inline .3s; }
+  .contact-link:hover { padding-inline: .5rem; color: #a9553d; }
+  .gallery-rail { overscroll-behavior-inline: contain; scrollbar-color: color-mix(in srgb, #302f2a 35%, transparent) transparent; scrollbar-width: thin; }
+  .gallery-rail::-webkit-scrollbar { height: 3px; }
+  .gallery-rail::-webkit-scrollbar-track { background: transparent; }
+  .gallery-rail::-webkit-scrollbar-thumb { background: color-mix(in srgb, #302f2a 35%, transparent); }
+  .gallery-control { display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid color-mix(in srgb, #302f2a 22%, transparent); border-radius: 999px; transition: color .25s, background-color .25s, transform .25s; }
+  .gallery-control:hover { background: #302f2a; color: #f4f1e9; transform: scale(1.04); }
+  .gallery-control svg { width: 1rem; }
+}
+
+@media (min-width: 1024px) {
+  .engineering-belief { grid-template-columns: minmax(180px, .28fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 7rem); }
+  .engineering-belief-keywords { display: grid; gap: .45rem; padding-top: .35rem; }
+  .engineering-belief-keywords span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
